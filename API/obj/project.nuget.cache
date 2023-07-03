@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "ag7HOR1zuZjuGldC2QhZUAk3K5HnE1lUl2+MYyHUhheCV3ke08bnP1u1ly4nFpkhZF6k9hQjvYh1R9Tiiqnybg==",
+  "success": true,
+  "projectFilePath": "/Users/keonwookim/Desktop/Personal Projects/Cargo-Scheduler/API/API.csproj",
+  "expectedPackageFiles": [
+    "/Users/keonwookim/.nuget/packages/microsoft.aspnetcore.openapi/7.0.7/microsoft.aspnetcore.openapi.7.0.7.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "/Users/keonwookim/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.5.0/swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
