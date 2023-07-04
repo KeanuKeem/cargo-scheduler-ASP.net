@@ -31,14 +31,14 @@ export default function AddForm() {
       </div>
       <InputField
         width="70%"
-        name="Estimate Time of Arrival (ETA)"
+        name="Departure / Arrival Date"
         id="ref"
         type="date"
         placeholder=""
       />
       <InputField
         width="70%"
-        name="Place of Discharge (POD)"
+        name="Departuring / Arriving Port"
         id="ref"
         type="text"
         placeholder="Auckland"
@@ -84,14 +84,7 @@ export default function AddForm() {
       />
       <InputField
         width="70%"
-        name="Place of Discharge (POD)"
-        id="ref"
-        type="text"
-        placeholder="Auckland"
-      />
-      <InputField
-        width="70%"
-        name="Handling Depot"
+        name="Freight Handling Depot"
         id="ref"
         type="text"
         placeholder="Tapper"

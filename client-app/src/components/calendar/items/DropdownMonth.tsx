@@ -45,7 +45,7 @@ export default function DropdownMonth({ month }: Props) {
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {months.map((month) => (
-              <Menu.Item key={month}>
+              <Menu.Item key={month[0]}>
                 {({ active }) => (
                   <div
                     className={classNames(
@@ -54,7 +54,7 @@ export default function DropdownMonth({ month }: Props) {
                     )}
                     onClick={(e) => setMonth(e.currentTarget.innerHTML)}
                   >
-                    {month}
+                    {month[0]}
                   </div>
                 )}
               </Menu.Item>

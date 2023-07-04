@@ -44,6 +44,7 @@
 .calendar__date-item__empty,
 .calendar__date-item {
   position: relative;
+  overflow: auto;
 }
 
 .calendar__date-item__empty {
@@ -78,4 +79,23 @@
   border-radius: 50%;
   background-color: #9c8fef;
   color: #fff;
+}
+
+.calendar__date-shipmentCont {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-top: .3rem;
+  height: 5rem;
+  overflow-y: auto;
+}
+
+.calendar__date-shipment {
+  width: 90%;
+  margin: 0 auto;
+  padding: .1rem .3rem;
+  border-radius: .3rem;
+  background-color: #9c8fef;
+  color: #fff;
+  font-size: .9rem;
 }

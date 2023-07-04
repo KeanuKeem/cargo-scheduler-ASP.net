@@ -8,8 +8,14 @@ import MonthChangeBtn from "./items/MonthChangeBtn";
 import Button from "./items/Button";
 import { modalActions } from "../../store/modalSlice";
 
-export default function Calendar() {
-  const { today, month, year, dateArray } = useAppSelector(
+interface Props {
+  shipments: {
+    [key: string]: [{ id: string; ref: string; shipmentType: string }];
+  };
+}
+
+export default function Calendar({ shipments }: Props) {
+  const { today, month, monthNum, year, dateArray } = useAppSelector(
     (state) => state.calendar
   );
   const dispatch = useAppDispatch();
@@ -18,7 +24,7 @@ export default function Calendar() {
   };
   const handleModal = () => {
     dispatch(modalActions.action());
-  }
+  };
 
   useEffect(() => {
     getDateArray();
@@ -59,6 +65,14 @@ export default function Calendar() {
                 ? dateArray[0].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[0].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[0].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -81,6 +95,14 @@ export default function Calendar() {
                 ? dateArray[1].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[1].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[1].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -103,6 +125,14 @@ export default function Calendar() {
                 ? dateArray[2].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[2].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[2].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -125,6 +155,14 @@ export default function Calendar() {
                 ? dateArray[3].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[3].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[3].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -147,6 +185,14 @@ export default function Calendar() {
                 ? dateArray[4].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[4].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[4].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -169,6 +215,14 @@ export default function Calendar() {
                 ? dateArray[5].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[5].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[5].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
           <div
             className={
@@ -191,6 +245,14 @@ export default function Calendar() {
                 ? dateArray[6].split(" ")[1]
                 : ""}
             </p>
+            <div className="calendar__date-shipmentCont">
+              {Number(dateArray[6].split(" ")[0]) in shipments &&
+                shipments[Number(dateArray[6].split(" ")[0])].map((item) => (
+                  <p className="calendar__date-shipment" key={item.id}>
+                    {"[" + item.shipmentType + "] " + item.ref}
+                  </p>
+                ))}
+            </div>
           </div>
         </div>
         <div className="calendar__date">
@@ -207,6 +269,14 @@ export default function Calendar() {
               >
                 {date.split(" ")[0] === "yes" ? date.split(" ")[1] : ""}
               </p>
+              <div className="calendar__date-shipmentCont">
+                {Number(date.split(" ")[1]) in shipments &&
+                  shipments[Number(date.split(" ")[1])].map((item) => (
+                    <p className="calendar__date-shipment" key={item.id}>
+                      {"[" + item.shipmentType + "] " + item.ref}
+                    </p>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
@@ -224,6 +294,14 @@ export default function Calendar() {
               >
                 {date.split(" ")[0] === "yes" ? date.split(" ")[1] : ""}
               </p>
+              <div className="calendar__date-shipmentCont">
+                {Number(date.split(" ")[1]) in shipments &&
+                  shipments[Number(date.split(" ")[1])].map((item) => (
+                    <p className="calendar__date-shipment" key={item.id}>
+                      {"[" + item.shipmentType + "] " + item.ref}
+                    </p>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
@@ -241,6 +319,14 @@ export default function Calendar() {
               >
                 {date.split(" ")[0] === "yes" ? date.split(" ")[1] : ""}
               </p>
+              <div className="calendar__date-shipmentCont">
+                {Number(date.split(" ")[1]) in shipments &&
+                  shipments[Number(date.split(" ")[1])].map((item) => (
+                    <p className="calendar__date-shipment" key={item.id}>
+                      {"[" + item.shipmentType + "] " + item.ref}
+                    </p>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
@@ -265,6 +351,14 @@ export default function Calendar() {
               >
                 {date.split(" ")[0] === "yes" ? date.split(" ")[1] : ""}
               </p>
+              <div className="calendar__date-shipmentCont">
+                {Number(date.split(" ")[1]) in shipments &&
+                  shipments[Number(date.split(" ")[1])].map((item) => (
+                    <p className="calendar__date-shipment" key={item.id}>
+                      {"[" + item.shipmentType + "] " + item.ref}
+                    </p>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
@@ -289,6 +383,14 @@ export default function Calendar() {
               >
                 {date.split(" ")[0] === "yes" ? date.split(" ")[1] : ""}
               </p>
+              <div className="calendar__date-shipmentCont">
+                {Number(date.split(" ")[1]) in shipments &&
+                  shipments[Number(date.split(" ")[1])].map((item) => (
+                    <p className="calendar__date-shipment" key={item.id}>
+                      {"[" + item.shipmentType + "] " + item.ref}
+                    </p>
+                  ))}
+              </div>
             </div>
           ))}
         </div>

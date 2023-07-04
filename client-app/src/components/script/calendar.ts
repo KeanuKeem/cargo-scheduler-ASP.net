@@ -1,17 +1,21 @@
-export const months: string[] = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+export const months: string[][] = [
+  ["January", "1"],
+  ["February", "2"],
+  ["March", "3"],
+  ["April", "4"],
+  ["May", "5"],
+  ["June", "6"],
+  ["July", "7"],
+  ["August", "8"],
+  ["September", "9"],
+  ["October", "10"],
+  ["November", "11"],
+  ["December", "12"]
 ];
+
+export function getMonthNum (month: string) {
+  return months[months.findIndex(item => item[0] === month)][1];
+}
 
 function getFirstDay(month: string, year: string) {
   const dateString = month + " 1," + year;

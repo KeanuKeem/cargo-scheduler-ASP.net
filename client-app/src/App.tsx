@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import CalendarPage from "./components/page/CalendarPage";
-import {store} from "./store/store";
+import { store } from "./store/store";
 
 function App() {
   return (
