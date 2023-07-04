@@ -47,16 +47,10 @@ export const calendarSlice = createSlice({
         state.monthNum = "1";
         state.year = state.year + 1;
       } else {
-        state.month =
-          months[
-            new Date(state.month + " 1, " + state.year.toString()).getMonth() +
-              1
-          ][0];
-        state.monthNum =
-          months[
-            new Date(state.month + " 1, " + state.year.toString()).getMonth() +
-              1
-          ][1];
+        const monthIndex =
+          new Date(state.month + " 1, " + state.year.toString()).getMonth() + 1;
+        state.month = months[monthIndex][0];
+        state.monthNum = months[monthIndex][1];
       }
     },
     decrementMonth: (state) => {
@@ -68,16 +62,10 @@ export const calendarSlice = createSlice({
         state.monthNum = "12";
         state.year = state.year--;
       } else {
-        state.month =
-          months[
-            new Date(state.month + " 1, " + state.year.toString()).getMonth() -
-              1
-          ][0];
-        state.monthNum =
-          months[
-            new Date(state.month + " 1, " + state.year.toString()).getMonth() -
-              1
-          ][1];
+        const monthIndex =
+          new Date(state.month + " 1, " + state.year.toString()).getMonth() - 1;
+        state.month = months[monthIndex][0];
+        state.monthNum = months[monthIndex][1];
       }
     },
     setMonth: (state, action: PayloadAction<string>) => {
