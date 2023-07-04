@@ -1,0 +1,22 @@
+.monthBtn {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dfdfdf;
+    border-radius: .3rem;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+}
+
+.monthBtn > * {
+    padding: .3rem .8rem;
+    cursor: pointer;
+}
+
+.monthBtn > *:hover {
+    background-color: #fafafa;
+}
+
+.monthBtn > :first-child {
+    border-right: 1px solid #dfdfdf;
+}

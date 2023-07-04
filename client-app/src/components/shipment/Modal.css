@@ -1,0 +1,27 @@
+.shipmentModal {
+    background-color: #fff;
+    width: 70vw;
+    height: 90vh;
+    border-radius: .4rem;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.072);
+    z-index: 31;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.shipmentModal-back {
+    background-color: #151515e8;
+    /* background-color: #efefef; */
+    width: 100vw;
+    height: 100vh;
+    z-index: 30;
+    top: 0;
+    left: 0;
+}
+
+.shipmentModal,
+.shipmentModal-back {
+    position: fixed;
+}

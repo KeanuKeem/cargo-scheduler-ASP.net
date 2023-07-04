@@ -1,0 +1,9 @@
+.addBtn {
+    border: 1px solid #dfdfdf;
+    border-radius: .3rem;
+    padding: 0 1.5rem;
+}
+
+.addBtn:hover {
+    background-color: #fafafa;
+}
