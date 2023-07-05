@@ -7,12 +7,14 @@ import AddForm from "../shipment/AddForm";
 import Modal from "../shipment/Modal";
 import "./CalendarPage.css";
 import axios from "axios";
+import Shipment from "../shipment/Shipment";
 
 export default function CalendarPage() {
   const { month, monthNum, year } = useAppSelector(
     (state) => state.calendar
   );
   const { isOpen } = useAppSelector((state) => state.modal);
+  const isShipmentOpen = useAppSelector((state) => state.shipment.isOpen);
 
   const [shipments, setShipments] = useState({});
 
@@ -36,7 +38,8 @@ export default function CalendarPage() {
       <NavBar />
       <Sidebar />
       <div className="main">
-        <Calendar shipments={shipments} />
+        {!isShipmentOpen && <Calendar shipments={shipments} />}
+        {isShipmentOpen && <Shipment />}
       </div>
     </>
   );

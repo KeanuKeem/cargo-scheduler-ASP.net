@@ -2,11 +2,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import DropdownMonth from "./items/DropdownMonth";
 import "./Calendar.css";
 import DropdownYear from "./items/DropdownYear";
-import { useEffect } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { calendarActions } from "../../store/calendarSlice";
 import MonthChangeBtn from "./items/MonthChangeBtn";
 import Button from "./items/Button";
 import { modalActions } from "../../store/modalSlice";
+import { shipmentActions } from "../../store/shipmentSlice";
 
 interface Props {
   shipments: {
@@ -24,6 +25,10 @@ export default function Calendar({ shipments }: Props) {
   };
   const handleModal = () => {
     dispatch(modalActions.action());
+  };
+  const openShipment = (event: SyntheticEvent) => {
+    dispatch(shipmentActions.setCurrShipment(event.currentTarget.id));
+    dispatch(shipmentActions.action());
   };
 
   useEffect(() => {
@@ -297,7 +302,12 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p className="calendar__date-shipment" key={item.id}>
+                    <p
+                      className="calendar__date-shipment"
+                      key={item.id}
+                      id={item.id}
+                      onClick={openShipment}
+                    >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </p>
                   ))}

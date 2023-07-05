@@ -1,3 +1,4 @@
+using Application.Map;
 using Application.Shipments;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ builder.Services.AddCors(option =>
     });
 });
 builder.Services.AddMediatR(typeof(ListOfShipments.Handler));
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
