@@ -8,11 +8,10 @@ import Modal from "../shipment/Modal";
 import "./CalendarPage.css";
 import axios from "axios";
 import Shipment from "../shipment/Shipment";
+import { getGroupedShipments } from "../script/calendar";
 
 export default function CalendarPage() {
-  const { month, monthNum, year } = useAppSelector(
-    (state) => state.calendar
-  );
+  const { month, monthNum, year } = useAppSelector((state) => state.calendar);
   const { isOpen } = useAppSelector((state) => state.modal);
   const isShipmentOpen = useAppSelector((state) => state.shipment.isOpen);
 
@@ -22,8 +21,9 @@ export default function CalendarPage() {
     axios
       .get(`http://localhost:5000/api/shipments/${year}/${monthNum}`)
       .then((response) => {
-        setShipments(response.data);
-        console.log(response.data);
+        const grouptedShipment = getGroupedShipments(response.data);
+        setShipments(grouptedShipment);
+        console.log(grouptedShipment);
       })
       .catch((err) => console.log(err));
   }, [month, year]);

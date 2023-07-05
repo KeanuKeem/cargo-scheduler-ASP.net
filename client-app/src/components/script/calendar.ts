@@ -1,3 +1,6 @@
+import { Dictionary } from "@reduxjs/toolkit";
+import { Shipment } from "../../model/shipment";
+
 export const months: string[][] = [
   ["January", "1"],
   ["February", "2"],
@@ -10,11 +13,11 @@ export const months: string[][] = [
   ["September", "9"],
   ["October", "10"],
   ["November", "11"],
-  ["December", "12"]
+  ["December", "12"],
 ];
 
-export function getMonthNum (month: string) {
-  return months[months.findIndex(item => item[0] === month)][1];
+export function getMonthNum(month: string) {
+  return months[months.findIndex((item) => item[0] === month)][1];
 }
 
 function getFirstDay(month: string, year: string) {
@@ -88,4 +91,15 @@ export function generateInitialDateArray() {
     dateArray.push("no " + i.toString());
   }
   return dateArray;
+}
+
+export function getGroupedShipments(shipmentsArray: Shipment[]) {
+  let shipmentsObject: Dictionary<Shipment[]> = {};
+  shipmentsArray.map((shipment) => {
+    const date = shipment.date.toString().split("-")[2];
+    shipmentsObject[date]
+      ? shipmentsObject[date]!.push(shipment)
+      : (shipmentsObject[date] = [shipment]);
+  });
+  return shipmentsObject;
 }

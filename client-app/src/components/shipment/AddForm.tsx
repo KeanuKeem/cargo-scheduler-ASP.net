@@ -1,8 +1,13 @@
+import { useState } from "react";
 import DropdownField from "./DropdownField";
 import FormButton from "./FormButton";
 import InputField from "./InputField";
+import TextareaField from "./TextareaField";
 
 export default function AddForm() {
+  const [freightType, setFreightType] = useState("Type");
+  const [shipmentType, setShipmentType] = useState("Type");
+
   return (
     <form style={{ width: "50%", margin: "0 auto", marginTop: "2rem" }}>
       <p className="text-base font-semibold leading-7 text-gray-900 mb-10">
@@ -17,13 +22,15 @@ export default function AddForm() {
       />
       <div style={{ display: "flex", flexDirection: "row", gap: "2rem" }}>
         <DropdownField
-          defaultOption="Type"
+          option={freightType}
+          setOption={setFreightType}
           options={["Import", "Export"]}
           name="Freight Type"
           width="50%"
         />
         <DropdownField
-          defaultOption="Type"
+          option={shipmentType}
+          setOption={setShipmentType}
           options={["AIR", "BROKERAGE", "FAK", "FCL", "LCL"]}
           name="Shipment Type"
           width="50%"
@@ -32,14 +39,14 @@ export default function AddForm() {
       <InputField
         width="70%"
         name="Departure / Arrival Date"
-        id="ref"
+        id="date"
         type="date"
         placeholder=""
       />
       <InputField
         width="70%"
         name="Departuring / Arriving Port"
-        id="ref"
+        id="port"
         type="text"
         placeholder="Auckland"
       />
@@ -47,14 +54,14 @@ export default function AddForm() {
         <InputField
           width="100%"
           name="Vessel"
-          id="ref"
+          id="vessel"
           type="text"
           placeholder="NYK FUTAGO"
         />
         <InputField
           width="100%"
           name="Voyage"
-          id="ref"
+          id="voyage"
           type="text"
           placeholder="111S"
         />
@@ -63,14 +70,14 @@ export default function AddForm() {
         <InputField
           width="100%"
           name="MBL"
-          id="ref"
+          id="mbl"
           type="text"
           placeholder="MBLNUMBER123456"
         />
         <InputField
           width="100%"
           name="HBL"
-          id="ref"
+          id="hbl"
           type="text"
           placeholder="HBLNUMBER123456"
         />
@@ -78,15 +85,22 @@ export default function AddForm() {
       <InputField
         width="70%"
         name="Container Number"
-        id="ref"
+        id="container"
         type="text"
         placeholder="CONT1234567"
       />
       <InputField
         width="70%"
         name="Freight Handling Depot"
-        id="ref"
+        id="depot"
         type="text"
+        placeholder="Tapper"
+      />
+      <TextareaField
+        width="100%"
+        name="Notes"
+        id="note"
+        rows={3}
         placeholder="Tapper"
       />
       <div style={{ display: "flex", gap: "1rem", paddingTop: "4rem", paddingBottom: "4rem", float: "right"}}>

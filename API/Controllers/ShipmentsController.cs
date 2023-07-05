@@ -8,7 +8,7 @@ namespace API.Controllers
     public class ShipmentsController : BaseApiController
     {
         [HttpGet("{year}/{month}")]
-        public async Task<ActionResult<Dictionary<string, List<Shipment>>>> GetShipments(CancellationToken ct, string year, string month)
+        public async Task<ActionResult<List<Shipment>>> GetShipments(string year, string month)
         {
             return await Mediator.Send(new ListOfShipments.Query { Year = year, Month = month });
         }

@@ -1,20 +1,21 @@
-import { Fragment, useState } from "react";
+import { Fragment, SyntheticEvent, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { SyntheticEventData } from "react-dom/test-utils";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 interface Props {
-  defaultOption: string;
+  option: string;
+  setOption: (event: string) => void;
   options: string[];
   name: string;
   width: string;
 }
 
-export default function DropdownField({ defaultOption, options, name, width }: Props) {
-  const [option, setOption] = useState(defaultOption);
+export default function DropdownField({ option, setOption, options, name, width }: Props) {
 
   return (
     <div
