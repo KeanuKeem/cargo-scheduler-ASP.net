@@ -19,6 +19,8 @@ namespace Persistence
                     Port = "POA",
                     Vessel = "NYK FUSHIMI",
                     Voyage = "111S",
+                    Mbl = "MBL0123456",
+                    Hbl = "HBL0123456",
                     Container = "CONT1111111",
                     Depot = "Tapper",
                     Note = ""
@@ -32,6 +34,8 @@ namespace Persistence
                     Port = "POA",
                     Vessel = "NYK FUSHIMI",
                     Voyage = "111S",
+                    Mbl = "MBL0123456",
+                    Hbl = "HBL0123456",
                     Container = "CONT2222222",
                     Depot = "Tapper",
                     Note = ""
@@ -45,6 +49,8 @@ namespace Persistence
                     Port = "POA",
                     Vessel = "NYK FUSHIMI",
                     Voyage = "111S",
+                    Mbl = "MBL0123456",
+                    Hbl = "HBL0123456",
                     Container = "CONT2222222",
                     Depot = "Tapper",
                     Note = ""
@@ -58,6 +64,8 @@ namespace Persistence
                     Port = "POA",
                     Vessel = "NYK FUTAGO",
                     Voyage = "192N",
+                    Mbl = "MBL0123456",
+                    Hbl = "HBL0123456",
                     Container = "CONT3333333",
                     Depot = "Tapper",
                     Note = ""

@@ -34,7 +34,7 @@ function isLeapYear(year: number) {
 function fillEmptyDates(dates: string[]) {
   const loops = 42 - dates.length;
   for (let i = 7; i < 7 + loops; i++) {
-    dates.push("no " + i.toString());
+    dates.push("no " + (i*100).toString());
   }
   return dates;
 }
@@ -64,13 +64,13 @@ export function generateDateArray(month: string, year: string) {
   let initialArray: string[];
   const firstDay = getFirstDay(month, year);
   if (firstDay === "Sun") initialArray = [];
-  else if (firstDay === "Mon") initialArray = ["no 1"];
-  else if (firstDay === "Tue") initialArray = ["no 1", "no 2"];
-  else if (firstDay === "Wed") initialArray = ["no 1", "no 2", "no 3"];
-  else if (firstDay === "Thu") initialArray = ["no 1", "no 2", "no 3", "no 4"];
+  else if (firstDay === "Mon") initialArray = ["no 100"];
+  else if (firstDay === "Tue") initialArray = ["no 100", "no 200"];
+  else if (firstDay === "Wed") initialArray = ["no 100", "no 200", "no 300"];
+  else if (firstDay === "Thu") initialArray = ["no 100", "no 200", "no 300", "no 400"];
   else if (firstDay === "Fri")
-    initialArray = ["no 1", "no 2", "no 3", "no 4", "no 5"];
-  else initialArray = ["no 1", "no 2", "no 3", "no 4", "no 5", "no 6"];
+    initialArray = ["no 100", "no 200", "no 300", "no 400", "no 500"];
+  else initialArray = ["no 100", "no 200", "no 300", "no 400", "no 500", "no 600"];
   for (let i = 1; i <= getDayinMonth(month, year)!; i++) {
     initialArray.push("yes " + i.toString());
   }

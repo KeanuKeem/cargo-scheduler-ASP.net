@@ -1,6 +1,12 @@
+import { ChangeEvent } from "react";
+
 interface Props {
   name: string;
   id: string;
+  value: string;
+  onChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   rows: number;
   placeholder: string;
   width: string;
@@ -9,6 +15,8 @@ interface Props {
 export default function TextareaField({
   name,
   id,
+  value,
+  onChange,
   rows,
   placeholder,
   width,
@@ -28,6 +36,8 @@ export default function TextareaField({
       <textarea
         name={name}
         id={id}
+        value={value}
+        onChange={onChange}
         rows={rows}
         placeholder={placeholder}
         style={{

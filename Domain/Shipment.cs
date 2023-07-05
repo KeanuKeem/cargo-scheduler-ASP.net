@@ -10,6 +10,8 @@ namespace Domain
         public string Port { get; set; }
         public string Vessel { get; set; }
         public string Voyage { get; set; }
+        public string Mbl { get; set; }
+        public string Hbl { get; set; }
         public string Container { get; set; }
         public string Depot { get; set; }
         public string Note { get; set; }

@@ -1,7 +1,7 @@
-import { Fragment, SyntheticEvent, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { SyntheticEventData } from "react-dom/test-utils";
+import { ShipmentFormValues } from "../../model/shipment";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -15,8 +15,13 @@ interface Props {
   width: string;
 }
 
-export default function DropdownField({ option, setOption, options, name, width }: Props) {
-
+export default function DropdownField({
+  option,
+  setOption,
+  options,
+  name,
+  width,
+}: Props) {
   return (
     <div
       style={{
@@ -24,7 +29,7 @@ export default function DropdownField({ option, setOption, options, name, width 
         flexDirection: "column",
         gap: ".6rem",
         width: width,
-        marginTop: "2rem"
+        marginTop: "2rem",
       }}
     >
       <label className="block text-sm font-medium leading-6 text-gray-900">
@@ -50,7 +55,10 @@ export default function DropdownField({ option, setOption, options, name, width 
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items style={{width: "100%"}} className="absolute ba right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items
+            style={{ width: "100%" }}
+            className="absolute ba right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          >
             <div className="py-1">
               {options.map((opt) => (
                 <Menu.Item key={opt}>
@@ -60,7 +68,9 @@ export default function DropdownField({ option, setOption, options, name, width 
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm"
                       )}
-                      onClick={(e) => setOption(e.currentTarget.innerHTML)}
+                      onClick={(e) => {
+                        setOption(e.currentTarget.innerHTML);
+                      }}
                     >
                       {opt}
                     </div>

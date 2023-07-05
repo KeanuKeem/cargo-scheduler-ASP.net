@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Calendar from "../calendar/Calendar";
 import NavBar from "../layout/NavBar";
 import Sidebar from "../layout/Sidebar";
@@ -9,24 +9,32 @@ import "./CalendarPage.css";
 import axios from "axios";
 import Shipment from "../shipment/Shipment";
 import { getGroupedShipments } from "../script/calendar";
+import { calendarActions } from "../../store/calendarSlice";
+import api from "../../api/api";
 
 export default function CalendarPage() {
-  const { month, monthNum, year } = useAppSelector((state) => state.calendar);
+  const { month, monthNum, year, refresh } = useAppSelector(
+    (state) => state.calendar
+  );
   const { isOpen } = useAppSelector((state) => state.modal);
   const isShipmentOpen = useAppSelector((state) => state.shipment.isOpen);
 
   const [shipments, setShipments] = useState({});
 
+  const dispatch = useAppDispatch();
+
+  const refreshOrigin = () => dispatch(calendarActions.refreshBack());
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/shipments/${year}/${monthNum}`)
+    api.Shipment.getShipments(year, monthNum)
       .then((response) => {
         const grouptedShipment = getGroupedShipments(response.data);
         setShipments(grouptedShipment);
         console.log(grouptedShipment);
       })
       .catch((err) => console.log(err));
-  }, [month, year]);
+    refreshOrigin();
+  }, [month, year, refresh]);
 
   return (
     <>

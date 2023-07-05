@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "./store";
 import {
   generateDateArray,
   generateInitialDateArray,
@@ -15,6 +14,7 @@ interface CalendarState {
   year: number;
   maxYear: number;
   dateArray: string[];
+  refresh: boolean;
 }
 
 const now = new Date();
@@ -32,6 +32,7 @@ const initialState: CalendarState = {
   year: new Date().getFullYear(),
   maxYear: new Date().getFullYear() + 4,
   dateArray: generateInitialDateArray(),
+  refresh: false,
 };
 
 export const calendarSlice = createSlice({
@@ -77,6 +78,12 @@ export const calendarSlice = createSlice({
     },
     getDateArray: (state) => {
       state.dateArray = generateDateArray(state.month, state.year.toString());
+    },
+    refreshCalendar: (state) => {
+      state.refresh = true;
+    },
+    refreshBack: (state) => {
+      state.refresh = false;
     },
   },
 });

@@ -7,6 +7,8 @@ export interface Shipment {
   port: string;
   vessel: string;
   voyage: string;
+  mbl: string;
+  hbl: string;
   container: string;
   depot: string;
   note: string;
@@ -23,10 +25,12 @@ export class ShipmentFormValues {
   ref: string = "";
   freightType: string = "";
   shipmentType: string = "";
-  date: Date | null = null;
+  date: Date | string = "";
   port: string = "";
   vessel: string = "";
   voyage: string = "";
+  mbl: string = "";
+  hbl: string = "";
   container: string = "";
   depot: string = "";
   note: string = "";
@@ -41,6 +45,8 @@ export class ShipmentFormValues {
       this.port = shipment.port;
       this.vessel = shipment.vessel;
       this.voyage = shipment.voyage;
+      this.mbl = shipment.mbl;
+      this.hbl = shipment.hbl;
       this.container = shipment.container;
       this.depot = shipment.depot;
       this.note = shipment.note;
