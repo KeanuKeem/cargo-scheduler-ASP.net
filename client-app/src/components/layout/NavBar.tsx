@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import { Link } from 'react-router-dom'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -100,9 +101,9 @@ export default function Example() {
             </Transition>
           </Popover> */}
 
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link to="/calendar" className="text-sm font-semibold leading-6 text-gray-900">
             Calendar
-          </a>
+          </Link>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             Todo
           </a>

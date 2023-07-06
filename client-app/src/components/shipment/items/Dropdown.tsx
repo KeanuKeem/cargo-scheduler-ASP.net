@@ -1,7 +1,8 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { ShipmentFormValues } from "../../model/shipment";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { shipmentActions } from "../../../store/shipmentSlice";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -11,7 +12,6 @@ interface Props {
   option: string;
   setOption: (event: string) => void;
   options: string[];
-  name: string;
   width: string;
 }
 
@@ -19,9 +19,9 @@ export default function DropdownField({
   option,
   setOption,
   options,
-  name,
   width,
 }: Props) {
+  
   return (
     <div
       style={{
@@ -29,12 +29,8 @@ export default function DropdownField({
         flexDirection: "column",
         gap: ".6rem",
         width: width,
-        marginTop: "2rem",
       }}
     >
-      <label className="block text-sm font-medium leading-6 text-gray-900">
-        {name}
-      </label>
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="reletive inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -68,9 +64,7 @@ export default function DropdownField({
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm"
                       )}
-                      onClick={(e) => {
-                        setOption(e.currentTarget.innerHTML);
-                      }}
+                      onClick={(e) => setOption(e.currentTarget.innerHTML)}
                     >
                       {opt}
                     </div>

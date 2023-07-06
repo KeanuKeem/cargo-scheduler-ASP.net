@@ -1,13 +1,8 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useState,
-} from "react";
-import DropdownField from "./DropdownField";
-import FormButton from "./FormButton";
-import InputField from "./InputField";
-import TextareaField from "./TextareaField";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import DropdownField from "./items/DropdownField";
+import FormButton from "./items/FormButton";
+import InputField from "./items/InputField";
+import TextareaField from "./items/TextareaField";
 import { ShipmentFormValues } from "../../model/shipment";
 import api from "../../api/api";
 import { useAppDispatch } from "../../store/hooks";
@@ -37,6 +32,11 @@ export default function AddForm() {
     event.preventDefault();
     api.Shipment.create(formData);
     refresh();
+    closeHandler();
+  };
+
+  const handleCancel = (event: FormEvent) => {
+    event.preventDefault();
     closeHandler();
   };
 
@@ -76,7 +76,7 @@ export default function AddForm() {
         <DropdownField
           option={shipmentType}
           setOption={setShipmentType}
-          options={["AIR", "BROKERAGE", "FAK", "FCL", "LCL"]}
+          options={["AIR", "FAK", "FCL", "LCL"]}
           name="Shipment Type"
           width="50%"
         />
@@ -179,8 +179,23 @@ export default function AddForm() {
           float: "right",
         }}
       >
-        <FormButton content="Cancel" fcolor="#000" color="#e7e7e7e8" />
-        <FormButton content="Submit" fcolor="#fff" color="#2b3de7e8" />
+        <FormButton
+          onClick={handleCancel}
+          content="Cancel"
+          style={{
+            padding: ".5rem 1rem",
+            borderRadius: ".3rem",
+            backgroundColor: "#e7e7e7e8",
+            color: "#000",
+          }}
+        />
+        <FormButton content="Submit" style={{
+            padding: ".5rem 1rem",
+            borderRadius: ".3rem",
+            backgroundColor: "#2b3de7e8",
+            color: "#fff",
+          }}
+        />
       </div>
     </form>
   );

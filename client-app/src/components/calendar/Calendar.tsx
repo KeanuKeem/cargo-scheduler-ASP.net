@@ -2,12 +2,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import DropdownMonth from "./items/DropdownMonth";
 import "./Calendar.css";
 import DropdownYear from "./items/DropdownYear";
-import { SyntheticEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { calendarActions } from "../../store/calendarSlice";
 import MonthChangeBtn from "./items/MonthChangeBtn";
 import Button from "./items/Button";
 import { modalActions } from "../../store/modalSlice";
-import { shipmentActions } from "../../store/shipmentSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   shipments: {
@@ -19,16 +19,14 @@ export default function Calendar({ shipments }: Props) {
   const { today, month, monthNum, year, dateArray } = useAppSelector(
     (state) => state.calendar
   );
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const getDateArray = () => {
     dispatch(calendarActions.getDateArray());
   };
   const handleModal = () => {
     dispatch(modalActions.action());
-  };
-  const openShipment = (event: SyntheticEvent) => {
-    dispatch(shipmentActions.setCurrShipment(event.currentTarget.id));
-    dispatch(shipmentActions.action());
   };
 
   useEffect(() => {
@@ -73,9 +71,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[0].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[0].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -103,9 +105,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[1].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[1].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -133,9 +139,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[2].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[2].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -163,9 +173,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[3].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[3].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -193,9 +207,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[4].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[4].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -223,9 +241,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[5].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[5].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -253,9 +275,13 @@ export default function Calendar({ shipments }: Props) {
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[6].split(" ")[0]) in shipments &&
                 shipments[Number(dateArray[6].split(" ")[0])].map((item) => (
-                  <p className="calendar__date-shipment" key={item.id}>
+                  <Link
+                    className="calendar__date-shipment"
+                    key={item.id}
+                    to={`/shipment/${item.id}`}
+                  >
                     {"[" + item.shipmentType + "] " + item.ref}
-                  </p>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -277,9 +303,13 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p className="calendar__date-shipment" key={item.id}>
+                    <Link
+                      className="calendar__date-shipment"
+                      key={item.id}
+                      to={`/shipment/${item.id}`}
+                    >
                       {"[" + item.shipmentType + "] " + item.ref}
-                    </p>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -302,14 +332,13 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p
+                    <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      id={item.id}
-                      onClick={openShipment}
+                      to={`/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
-                    </p>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -332,9 +361,13 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p className="calendar__date-shipment" key={item.id}>
+                    <Link
+                      className="calendar__date-shipment"
+                      key={item.id}
+                      to={`/shipment/${item.id}`}
+                    >
                       {"[" + item.shipmentType + "] " + item.ref}
-                    </p>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -364,9 +397,13 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p className="calendar__date-shipment" key={item.id}>
+                    <Link
+                      className="calendar__date-shipment"
+                      key={item.id}
+                      to={`/shipment/${item.id}`}
+                    >
                       {"[" + item.shipmentType + "] " + item.ref}
-                    </p>
+                    </Link>
                   ))}
               </div>
             </div>
@@ -396,9 +433,13 @@ export default function Calendar({ shipments }: Props) {
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
                   shipments[Number(date.split(" ")[1])].map((item) => (
-                    <p className="calendar__date-shipment" key={item.id}>
+                    <Link
+                      className="calendar__date-shipment"
+                      key={item.id}
+                      to={`/shipment/${item.id}`}
+                    >
                       {"[" + item.shipmentType + "] " + item.ref}
-                    </p>
+                    </Link>
                   ))}
               </div>
             </div>

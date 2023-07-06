@@ -1,23 +1,19 @@
 import { ChangeEvent } from "react";
 
 interface Props {
-  name: string;
   id: string;
-  value: string;
-  onChange: (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  rows: number;
+  value: string | Date;
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  type: string;
   placeholder: string;
   width: string;
 }
 
-export default function TextareaField({
-  name,
+export default function InputField({
   id,
   value,
   onChange,
-  rows,
+  type,
   placeholder,
   width,
 }: Props) {
@@ -27,18 +23,13 @@ export default function TextareaField({
         display: "flex",
         flexDirection: "column",
         gap: ".6rem",
-        marginTop: "2rem",
       }}
     >
-      <label className="block text-sm font-medium leading-6 text-gray-900">
-        {name}
-      </label>
-      <textarea
-        name={name}
-        id={id}
-        value={value}
+      <input
+        name={id}
+        value={value.toString()}
         onChange={onChange}
-        rows={rows}
+        type={type}
         placeholder={placeholder}
         style={{
           width: width,

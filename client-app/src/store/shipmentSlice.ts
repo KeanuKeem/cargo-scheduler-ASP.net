@@ -2,12 +2,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ShipmentState {
   isOpen: boolean;
-  currentShipment: string;
 }
 
 const initialState: ShipmentState = {
   isOpen: false,
-  currentShipment: "",
 };
 
 export const shipmentSlice = createSlice({
@@ -16,9 +14,6 @@ export const shipmentSlice = createSlice({
   reducers: {
     action: (state) => {
       state.isOpen = !state.isOpen;
-    },
-    setCurrShipment: (state, action: PayloadAction<string>) => {
-        state.currentShipment = action.payload;
     },
   },
 });

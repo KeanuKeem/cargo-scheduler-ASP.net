@@ -6,18 +6,17 @@ import Sidebar from "../layout/Sidebar";
 import AddForm from "../shipment/AddForm";
 import Modal from "../shipment/Modal";
 import "./CalendarPage.css";
-import axios from "axios";
-import Shipment from "../shipment/Shipment";
 import { getGroupedShipments } from "../script/calendar";
 import { calendarActions } from "../../store/calendarSlice";
 import api from "../../api/api";
+import { Provider } from "react-redux";
+import { store } from "../../store/store";
 
 export default function CalendarPage() {
   const { month, monthNum, year, refresh } = useAppSelector(
     (state) => state.calendar
   );
   const { isOpen } = useAppSelector((state) => state.modal);
-  const isShipmentOpen = useAppSelector((state) => state.shipment.isOpen);
 
   const [shipments, setShipments] = useState({});
 
@@ -30,14 +29,13 @@ export default function CalendarPage() {
       .then((response) => {
         const grouptedShipment = getGroupedShipments(response.data);
         setShipments(grouptedShipment);
-        console.log(grouptedShipment);
       })
       .catch((err) => console.log(err));
     refreshOrigin();
   }, [month, year, refresh]);
 
   return (
-    <>
+    <Provider store={store}>
       {isOpen && (
         <Modal>
           <AddForm />
@@ -46,9 +44,8 @@ export default function CalendarPage() {
       <NavBar />
       <Sidebar />
       <div className="main">
-        {!isShipmentOpen && <Calendar shipments={shipments} />}
-        {isShipmentOpen && <Shipment />}
+        <Calendar shipments={shipments} />
       </div>
-    </>
+    </Provider>
   );
 }
