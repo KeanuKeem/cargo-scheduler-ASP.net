@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Calendar from "../calendar/Calendar";
-import NavBar from "../layout/NavBar";
-import Sidebar from "../layout/Sidebar";
 import AddForm from "../shipment/AddForm";
 import Modal from "../shipment/Modal";
-import "./CalendarPage.css";
 import { getGroupedShipments } from "../script/calendar";
 import { calendarActions } from "../../store/calendarSlice";
 import api from "../../api/api";
-import { Provider } from "react-redux";
-import { store } from "../../store/store";
+import Main from "../layout/Main";
 
 export default function CalendarPage() {
   const { month, monthNum, year, refresh } = useAppSelector(
@@ -35,17 +31,15 @@ export default function CalendarPage() {
   }, [month, year, refresh]);
 
   return (
-    <Provider store={store}>
+    <>
       {isOpen && (
         <Modal>
           <AddForm />
         </Modal>
       )}
-      <NavBar />
-      <Sidebar />
-      <div className="main">
+      <Main>
         <Calendar shipments={shipments} />
-      </div>
-    </Provider>
+      </Main>
+    </>
   );
 }

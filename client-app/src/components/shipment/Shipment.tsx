@@ -3,8 +3,6 @@ import api from "../../api/api";
 import { ShipmentFormValues } from "../../model/shipment";
 import ShipmentHeader from "./items/ShipmentHeader";
 import ShipmentBody from "./items/ShipmentBody";
-import { useAppDispatch } from "../../store/hooks";
-import { calendarActions } from "../../store/calendarSlice";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -19,8 +17,6 @@ export default function Shipment({ id }: Props) {
   const [formData, setFormData] = useState(new ShipmentFormValues());
 
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const refresh = () => dispatch(calendarActions.refreshCalendar());
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,7 +31,6 @@ export default function Shipment({ id }: Props) {
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
     api.Shipment.edit(id!, formData);
-    refresh();
     navigate("/calendar");
   };
 

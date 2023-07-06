@@ -1,6 +1,12 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { ShipmentFormValues } from "../../../model/shipment";
 import FormButton from "./FormButton";
+import NotificationModal from "./NotificationModal";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { store } from "../../../store/store";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { modalActions } from "../../../store/modalSlice";
 
 interface Props {
   shipment: ShipmentFormValues;
@@ -21,6 +27,11 @@ export default function ShipmentHeader({
   setFormData,
   handleEdit,
 }: Props) {
+  const dispatch = useAppDispatch();
+  const deleteBtnHandler = () => {
+    dispatch(modalActions.notificationAction());
+  };
+
   return (
     <div className="px-4 sm:px-0">
       <h3 className="pl-3 text-base font-semibold leading-7 text-gray-900">
@@ -83,7 +94,7 @@ export default function ShipmentHeader({
                     setFormData(shipment);
                     setIsEdit(false);
                   }
-                : () => console.log("Delete")
+                : () => deleteBtnHandler()
             }
           />
         </div>

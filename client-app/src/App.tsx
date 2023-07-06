@@ -1,12 +1,16 @@
 import { Provider } from "react-redux";
-import CalendarPage from "./components/page/CalendarPage";
 import { store } from "./store/store";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./components/layout/Sidebar";
+import NavBar from "./components/layout/NavBar";
 
 function App() {
   return (
     <>
       <Provider store={store}>
-        <CalendarPage />
+        <NavBar />
+        <Sidebar />
+        <Outlet />
       </Provider>
     </>
   );
