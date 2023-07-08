@@ -95,8 +95,9 @@ export function generateInitialDateArray() {
 
 export function getGroupedShipments(shipmentsArray: Shipment[]) {
   let shipmentsObject: Dictionary<Shipment[]> = {};
-  shipmentsArray.map((shipment) => {
-    const date = shipment.date.toString().split("-")[2];
+  shipmentsArray.map((shipment: Shipment) => {
+    let date = shipment.date.toString().split("-")[2];
+    if (date[0] === "0") date = date[1];
     shipmentsObject[date]
       ? shipmentsObject[date]!.push(shipment)
       : (shipmentsObject[date] = [shipment]);

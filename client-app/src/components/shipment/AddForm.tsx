@@ -3,7 +3,10 @@ import DropdownField from "./items/DropdownField";
 import FormButton from "./items/FormButton";
 import InputField from "./items/InputField";
 import TextareaField from "./items/TextareaField";
-import { ShipmentFormValues } from "../../model/shipment";
+import {
+  ShipmentFormValues,
+  ShipmentResponseValues,
+} from "../../model/shipment";
 import api from "../../api/api";
 import { useAppDispatch } from "../../store/hooks";
 import { modalActions } from "../../store/modalSlice";
@@ -13,6 +16,7 @@ export default function AddForm() {
   const [freightType, setFreightType] = useState("Type");
   const [shipmentType, setShipmentType] = useState("Type");
   const [formData, setFormData] = useState(new ShipmentFormValues());
+  const [errors, setErrors] = useState(new ShipmentResponseValues());
 
   const dispatch = useAppDispatch();
   const closeHandler = () => dispatch(modalActions.action());
@@ -30,9 +34,16 @@ export default function AddForm() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    api.Shipment.create(formData);
-    refresh();
-    closeHandler();
+    if (formData.date === "") formData.date = "1500-01-01";
+    api.Shipment.create(formData)
+      .then((res) => {
+        refresh();
+        closeHandler();
+      })
+      .catch((err) => {
+        setErrors(err.response.data.errors);
+        formData.date = "";
+      });
   };
 
   const handleCancel = (event: FormEvent) => {
@@ -53,72 +64,81 @@ export default function AddForm() {
       onSubmit={handleSubmit}
       style={{ width: "50%", margin: "0 auto", marginTop: "2rem" }}
     >
-      <p className="text-base font-semibold leading-7 text-gray-900 mb-10">
+      <p className="text-base font-semibold leading-7 text-gray-900 mb-1">
         Create your shipment:
+      </p>
+      <p
+        className="text-base text-gray-900 mb-10"
+        style={{ fontSize: ".9rem" }}
+      >
+        {"(*) Please fill out these sections."}
       </p>
       <InputField
         width="70%"
-        name="Shipment ID"
+        name="*Shipment ID"
         id="ref"
         value={formData.ref}
         onChange={handleChange}
         type="text"
-        placeholder="S00123456"
+        error={errors.Ref[0]}
       />
       <div style={{ display: "flex", flexDirection: "row", gap: "2rem" }}>
         <DropdownField
           option={freightType}
           setOption={setFreightType}
           options={["Import", "Export"]}
-          name="Freight Type"
+          name="*Freight Type"
           width="50%"
+          error={errors.FreightType[0]}
         />
         <DropdownField
           option={shipmentType}
           setOption={setShipmentType}
           options={["AIR", "FAK", "FCL", "LCL"]}
-          name="Shipment Type"
+          name="*Shipment Type"
           width="50%"
+          error={errors.ShipmentType[0]}
         />
       </div>
       <InputField
         width="70%"
-        name="Departure / Arrival Date"
+        name="*Departure / Arrival Date"
         id="date"
+        min="2023-01-01"
         value={formData.date}
         onChange={handleChange}
         type="date"
-        placeholder=""
+        error={errors.Date[0]}
       />
       <InputField
         width="70%"
-        name="Departuring / Arriving Port"
+        name="*Departuring / Arriving Port"
         id="port"
         value={formData.port}
         onChange={handleChange}
         type="text"
-        placeholder="Auckland"
+        error={errors.Port[0]}
       />
       <div
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}
       >
         <InputField
           width="100%"
-          name="Vessel"
+          name="*Vessel"
           id="vessel"
           value={formData.vessel}
           onChange={handleChange}
           type="text"
-          placeholder="NYK FUTAGO"
+          error={errors.Vessel[0]}
         />
         <InputField
           width="100%"
-          name="Voyage"
+          name="*Voyage"
           id="voyage"
           value={formData.voyage}
           onChange={handleChange}
           type="text"
-          placeholder="111S"
+          error={errors.Voyage[0]}
         />
       </div>
       <div
@@ -131,7 +151,6 @@ export default function AddForm() {
           value={formData.mbl}
           onChange={handleChange}
           type="text"
-          placeholder="MBLNUMBER123456"
         />
         <InputField
           width="100%"
@@ -140,17 +159,16 @@ export default function AddForm() {
           value={formData.hbl}
           onChange={handleChange}
           type="text"
-          placeholder="HBLNUMBER123456"
         />
       </div>
       <InputField
         width="70%"
-        name="Container Number"
+        name="*Container Number"
         id="container"
         value={formData.container}
         onChange={handleChange}
         type="text"
-        placeholder="CONT1234567"
+        error={errors.Container[0]}
       />
       <InputField
         width="70%"
@@ -159,7 +177,6 @@ export default function AddForm() {
         value={formData.depot}
         onChange={handleChange}
         type="text"
-        placeholder="Tapper"
       />
       <TextareaField
         width="100%"
@@ -168,7 +185,6 @@ export default function AddForm() {
         value={formData.note}
         onChange={handleChange}
         rows={3}
-        placeholder="Tapper"
       />
       <div
         style={{
@@ -189,7 +205,9 @@ export default function AddForm() {
             color: "#000",
           }}
         />
-        <FormButton content="Submit" style={{
+        <FormButton
+          content="Submit"
+          style={{
             padding: ".5rem 1rem",
             borderRadius: ".3rem",
             backgroundColor: "#2b3de7e8",

@@ -7,7 +7,7 @@ import { calendarActions } from "../../store/calendarSlice";
 import MonthChangeBtn from "./items/MonthChangeBtn";
 import Button from "./items/Button";
 import { modalActions } from "../../store/modalSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {
   shipments: {
@@ -16,10 +16,9 @@ interface Props {
 }
 
 export default function Calendar({ shipments }: Props) {
-  const { today, month, monthNum, year, dateArray } = useAppSelector(
+  const { today, month, year, dateArray } = useAppSelector(
     (state) => state.calendar
   );
-  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const getDateArray = () => {
@@ -69,8 +68,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[0].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[0].split(" ")[0])].map((item) => (
+              {Number(dateArray[0].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[0].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -103,8 +102,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[1].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[1].split(" ")[0])].map((item) => (
+              {Number(dateArray[1].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[1].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -137,8 +136,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[2].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[2].split(" ")[0])].map((item) => (
+              {Number(dateArray[2].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[2].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -171,8 +170,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[3].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[3].split(" ")[0])].map((item) => (
+              {Number(dateArray[3].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[3].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -205,8 +204,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[4].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[4].split(" ")[0])].map((item) => (
+              {Number(dateArray[4].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[4].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -239,8 +238,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[5].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[5].split(" ")[0])].map((item) => (
+              {Number(dateArray[5].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[5].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -273,8 +272,8 @@ export default function Calendar({ shipments }: Props) {
                 : ""}
             </p>
             <div className="calendar__date-shipmentCont">
-              {Number(dateArray[6].split(" ")[0]) in shipments &&
-                shipments[Number(dateArray[6].split(" ")[0])].map((item) => (
+              {Number(dateArray[6].split(" ")[1]) in shipments &&
+                shipments[Number(dateArray[6].split(" ")[1])].map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}

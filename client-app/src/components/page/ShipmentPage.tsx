@@ -14,7 +14,7 @@ export default function ShipmentPage() {
   const dispatch = useAppDispatch();
   const closeHandler = () => {
     dispatch(modalActions.notificationAction());
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export default function ShipmentPage() {
     api.Shipment.delete(id!);
     closeHandler();
     navigate("/calendar");
-  }
+  };
 
   return (
     <>

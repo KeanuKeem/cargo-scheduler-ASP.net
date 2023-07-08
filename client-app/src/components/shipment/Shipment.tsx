@@ -1,9 +1,11 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import api from "../../api/api";
-import { ShipmentFormValues } from "../../model/shipment";
+import { ShipmentFormValues, ShipmentResponseValues } from "../../model/shipment";
 import ShipmentHeader from "./items/ShipmentHeader";
 import ShipmentBody from "./items/ShipmentBody";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import exit from "../../assets/circle-xmark-regular.svg";
+import left from "../../assets/circle-left.svg";
 
 interface Props {
   id: string | undefined;
@@ -15,6 +17,7 @@ export default function Shipment({ id }: Props) {
   const [freightType, setFreightType] = useState("");
   const [shipmentType, setShipmentType] = useState("");
   const [formData, setFormData] = useState(new ShipmentFormValues());
+  const [errors, setErrors] = useState(new ShipmentResponseValues());
 
   const navigate = useNavigate();
 
@@ -30,8 +33,16 @@ export default function Shipment({ id }: Props) {
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
-    api.Shipment.edit(id!, formData);
-    navigate("/calendar");
+    if (formData.date === "") formData.date = "1500-01-01";
+    api.Shipment.edit(id!, formData)
+    .then(() => navigate("/calendar"))
+    .catch(err => {
+      console.log(err.response.data.errors);
+      
+      setErrors(err.response.data.errors);
+      if (err.response.data.errors.Date) formData.date = "";
+    });
+    
   };
 
   useEffect(() => {
@@ -40,14 +51,14 @@ export default function Shipment({ id }: Props) {
         setShipment(response.data);
         setFormData(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log());
   }, []);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      "freightType": freightType,
-      "shipmentType": shipmentType,
+      freightType: freightType,
+      shipmentType: shipmentType,
     }));
   }, [freightType, shipmentType]);
 
@@ -56,6 +67,36 @@ export default function Shipment({ id }: Props) {
       className="calendar"
       style={{ padding: "3rem", position: "relative", marginBottom: "3rem" }}
     >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: ".5rem",
+          margin: "-1rem 0 2rem 0",
+        }}
+      >
+        {isEdit && (
+          <img
+            src={left}
+            onClick={() => {
+              setFormData(shipment);
+              setIsEdit(false);
+            }}
+            alt="left"
+            style={{ width: "1rem", cursor: "pointer" }}
+          />
+        )}
+        <img
+          src={exit}
+          onClick={() => {
+            setFormData(shipment);
+            navigate("/calendar");
+          }}
+          alt="exit"
+          style={{ width: "1rem", cursor: "pointer" }}
+        />
+      </div>
+
       {shipment && (
         <>
           <ShipmentHeader
@@ -76,6 +117,7 @@ export default function Shipment({ id }: Props) {
             setFreightType={setFreightType}
             formData={formData}
             handleChange={handleChange}
+            errors={errors}
           />
         </>
       )}

@@ -6,8 +6,10 @@ interface Props {
   value: string | Date;
   onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type: string;
-  placeholder: string;
+  min?: string;
+  placeholder?: string;
   width: string;
+  error?: string;
 }
 
 export default function InputField({
@@ -16,8 +18,10 @@ export default function InputField({
   value,
   onChange,
   type,
+  min,
   placeholder,
   width,
+  error
 }: Props) {
   return (
     <div
@@ -36,6 +40,7 @@ export default function InputField({
         value={value.toString()}
         onChange={onChange}
         type={type}
+        min={min}
         placeholder={placeholder}
         style={{
           width: width,
@@ -44,6 +49,7 @@ export default function InputField({
           padding: ".3rem .7rem",
         }}
       />
+      <p className="block text-sm font-medium leading-6 text-gray-900 ml-2" style={{color: "red", fontStyle: "italic"}}>{error && "- "+ error}</p>
     </div>
   );
 }

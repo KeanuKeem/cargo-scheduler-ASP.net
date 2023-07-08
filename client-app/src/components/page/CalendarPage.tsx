@@ -23,12 +23,12 @@ export default function CalendarPage() {
   useEffect(() => {
     api.Shipment.getShipments(year, monthNum)
       .then((response) => {
-        const grouptedShipment = getGroupedShipments(response.data);
-        setShipments(grouptedShipment);
+        const groupedShipment = getGroupedShipments(response.data);
+        setShipments(groupedShipment);
       })
       .catch((err) => console.log(err));
     refreshOrigin();
-  }, [month, year, refresh]);
+  }, [month, year, refresh, monthNum]);
 
   return (
     <>

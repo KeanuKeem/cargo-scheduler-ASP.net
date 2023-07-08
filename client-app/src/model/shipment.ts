@@ -53,3 +53,27 @@ export class ShipmentFormValues {
     }
   }
 }
+
+export class ShipmentResponseValues {
+  Ref: string = "";
+  FreightType: string = "";
+  ShipmentType: string = "";
+  Date: string = "";
+  Port: string = "";
+  Vessel: string = "";
+  Voyage: string = "";
+  Container: string = "";
+
+  constructor(shipment?: ShipmentResponseValues) {
+    if (shipment) {
+      this.Ref = shipment.Ref;
+      this.FreightType = shipment.FreightType;
+      this.ShipmentType = shipment.ShipmentType;
+      this.Date = shipment.Date;
+      this.Port = shipment.Port;
+      this.Vessel = shipment.Vessel;
+      this.Voyage = shipment.Voyage;
+      this.Container = shipment.Container;
+    }
+  }
+}

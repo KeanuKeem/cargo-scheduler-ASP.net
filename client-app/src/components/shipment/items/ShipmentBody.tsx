@@ -1,5 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
-import { ShipmentFormValues } from "../../../model/shipment";
+import {
+  ShipmentFormValues,
+  ShipmentResponseValues,
+} from "../../../model/shipment";
 import Dropdown from "./Dropdown";
 import Input from "./Input";
 import Textarea from "./Textarea";
@@ -15,6 +18,7 @@ interface Props {
   handleChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  errors: ShipmentResponseValues;
 }
 
 export default function ShipmentBody({
@@ -26,6 +30,7 @@ export default function ShipmentBody({
   setShipmentType,
   formData,
   handleChange,
+  errors,
 }: Props) {
   const dateString = shipment.date.toString();
   const date =
@@ -54,6 +59,14 @@ export default function ShipmentBody({
                   width="30%"
                 />
               </dd>
+              <dd>{errors.FreightType && errors.FreightType[0]}</dd>
+              <dt></dt>
+              <dd
+                className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                style={{ color: "red", fontStyle: "italic" }}
+              >
+                {errors.FreightType && "- " + errors.FreightType[0]}
+              </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -69,6 +82,13 @@ export default function ShipmentBody({
                   width="30%"
                 />
               </dd>
+              <dt></dt>
+              <dd
+                className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                style={{ color: "red", fontStyle: "italic" }}
+              >
+                {errors.ShipmentType && "- " + errors.ShipmentType[0]}
+              </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -83,6 +103,13 @@ export default function ShipmentBody({
                   width="50%"
                   placeholder=""
                 />
+              </dd>
+              <dt></dt>
+              <dd
+                className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                style={{ color: "red", fontStyle: "italic" }}
+              >
+                {errors.Ref && "- " + errors.Ref[0]}
               </dd>
             </div>
           </>
@@ -107,6 +134,13 @@ export default function ShipmentBody({
               date
             )}
           </dd>
+          <dt></dt>
+          <dd
+            className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+            style={{ color: "red", fontStyle: "italic" }}
+          >
+            {errors.Date && "- " + errors.Date[0]}
+          </dd>
         </div>
         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -128,6 +162,13 @@ export default function ShipmentBody({
               shipment.port
             )}
           </dd>
+          <dt></dt>
+          <dd
+            className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+            style={{ color: "red", fontStyle: "italic" }}
+          >
+            {errors.Port && "- " + errors.Port[0]}
+          </dd>
         </div>
         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -146,7 +187,12 @@ export default function ShipmentBody({
                 />
               ) : (
                 <div
-                  style={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "1rem",
+                    width: "80%",
+                  }}
                 >
                   <Input
                     id="vessel"
@@ -164,6 +210,18 @@ export default function ShipmentBody({
                     width="100%"
                     placeholder=""
                   />
+                  <dd
+                    className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                    style={{ color: "red", fontStyle: "italic" }}
+                  >
+                    {errors.Vessel && "- " + errors.Vessel[0]}
+                  </dd>
+                  <dd
+                    className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                    style={{ color: "red", fontStyle: "italic" }}
+                  >
+                    {errors.Voyage && "- " + errors.Voyage[0]}
+                  </dd>
                 </div>
               )
             ) : shipment.shipmentType === "AIR" ? (
@@ -226,6 +284,13 @@ export default function ShipmentBody({
               ) : (
                 shipment.container
               )}
+            </dd>
+            <dt></dt>
+            <dd
+              className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+              style={{ color: "red", fontStyle: "italic" }}
+            >
+              {errors.Container && "- " + errors.Container[0]}
             </dd>
           </div>
         )}

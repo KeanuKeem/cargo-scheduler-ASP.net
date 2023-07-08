@@ -8,7 +8,7 @@ interface Props {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   rows: number;
-  placeholder: string;
+  placeholder?: string;
   width: string;
 }
 

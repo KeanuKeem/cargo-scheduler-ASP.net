@@ -12,6 +12,7 @@ interface Props {
   options: string[];
   name: string;
   width: string;
+  error?: string;
 }
 
 export default function DropdownField({
@@ -20,6 +21,7 @@ export default function DropdownField({
   options,
   name,
   width,
+  error,
 }: Props) {
   return (
     <div
@@ -80,6 +82,7 @@ export default function DropdownField({
           </Menu.Items>
         </Transition>
       </Menu>
+      <p className="block text-sm font-medium leading-6 text-gray-900 ml-2" style={{color: "red", fontStyle: "italic"}}>{error && "- " + error}</p>
     </div>
   );
 }
