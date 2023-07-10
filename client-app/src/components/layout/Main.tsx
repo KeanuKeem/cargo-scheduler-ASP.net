@@ -8,7 +8,7 @@ export default function Main({ children }: Props) {
   return (
     <div
       style={{
-        width: "85%",
+        width: "100%",
         height: "100vh",
         backgroundColor: "#f3f3f3",
         position: "absolute",

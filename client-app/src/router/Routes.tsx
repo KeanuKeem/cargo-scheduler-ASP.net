@@ -3,6 +3,7 @@ import App from "../App";
 import ShipmentPage from "../components/page/ShipmentPage";
 import CalendarPage from "../components/page/CalendarPage";
 import HomePage from "../components/page/HomePage";
+import NotFoundPage from "../components/page/NotFoundPage";
 
 export const routes: RouteObject[] = [
   {
@@ -11,6 +12,7 @@ export const routes: RouteObject[] = [
     children: [
       { path: "/calendar", element: <CalendarPage /> },
       { path: "/shipment/:id", element: <ShipmentPage /> },
+      { path: "/not-found", element: <NotFoundPage /> },
     ],
   },
 ];

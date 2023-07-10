@@ -177,14 +177,22 @@ export default function ShipmentBody({
           <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             {isEdit ? (
               formData.shipmentType === "AIR" ? (
-                <Input
-                  id="vessel"
-                  value={formData.vessel}
-                  onChange={handleChange}
-                  type="text"
-                  width="50%"
-                  placeholder=""
-                />
+                <>
+                  <Input
+                    id="vessel"
+                    value={formData.vessel}
+                    onChange={handleChange}
+                    type="text"
+                    width="50%"
+                    placeholder=""
+                  />
+                  <p
+                    className="block text-sm font-medium leading-6 text-gray-900 ml-2"
+                    style={{ color: "red", fontStyle: "italic" }}
+                  >
+                    {errors.Vessel && "- " + errors.Vessel[0]}
+                  </p>
+                </>
               ) : (
                 <div
                   style={{
@@ -210,18 +218,18 @@ export default function ShipmentBody({
                     width="100%"
                     placeholder=""
                   />
-                  <dd
+                  <p
                     className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                     style={{ color: "red", fontStyle: "italic" }}
                   >
                     {errors.Vessel && "- " + errors.Vessel[0]}
-                  </dd>
-                  <dd
+                  </p>
+                  <p
                     className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                     style={{ color: "red", fontStyle: "italic" }}
                   >
                     {errors.Voyage && "- " + errors.Voyage[0]}
-                  </dd>
+                  </p>
                 </div>
               )
             ) : shipment.shipmentType === "AIR" ? (
@@ -232,40 +240,48 @@ export default function ShipmentBody({
           </dd>
         </div>
 
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">MBL:</dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {isEdit ? (
-              <Input
-                id="mbl"
-                value={formData.mbl}
-                onChange={handleChange}
-                type="text"
-                width="50%"
-                placeholder=""
-              />
-            ) : (
-              shipment.mbl
-            )}
-          </dd>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">HBL:</dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {isEdit ? (
-              <Input
-                id="hbl"
-                value={formData.hbl}
-                onChange={handleChange}
-                type="text"
-                width="50%"
-                placeholder=""
-              />
-            ) : (
-              shipment.hbl
-            )}
-          </dd>
-        </div>
+        {(shipment.mbl || isEdit) && (
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              MBL:
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {isEdit ? (
+                <Input
+                  id="mbl"
+                  value={formData.mbl}
+                  onChange={handleChange}
+                  type="text"
+                  width="50%"
+                  placeholder=""
+                />
+              ) : (
+                shipment.mbl
+              )}
+            </dd>
+          </div>
+        )}
+        {(shipment.hbl || isEdit) && (
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              HBL:
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {isEdit ? (
+                <Input
+                  id="hbl"
+                  value={formData.hbl}
+                  onChange={handleChange}
+                  type="text"
+                  width="50%"
+                  placeholder=""
+                />
+              ) : (
+                shipment.hbl
+              )}
+            </dd>
+          </div>
+        )}
         {formData.shipmentType !== "AIR" && (
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -294,26 +310,28 @@ export default function ShipmentBody({
             </dd>
           </div>
         )}
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Handling Depot
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {isEdit ? (
-              <Input
-                id="depot"
-                value={formData.depot}
-                onChange={handleChange}
-                type="text"
-                width="50%"
-                placeholder=""
-              />
-            ) : (
-              shipment.depot
-            )}
-          </dd>
-        </div>
-        {(!!shipment.note || isEdit) && (
+        {(shipment.depot || isEdit) && (
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Handling Depot
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {isEdit ? (
+                <Input
+                  id="depot"
+                  value={formData.depot}
+                  onChange={handleChange}
+                  type="text"
+                  width="50%"
+                  placeholder=""
+                />
+              ) : (
+                shipment.depot
+              )}
+            </dd>
+          </div>
+        )}
+        {(shipment.note || isEdit) && (
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
               Note

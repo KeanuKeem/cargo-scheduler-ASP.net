@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ShipmentResponseValues } from "../model/shipment";
 
 interface ShipmentState {
   isOpen: boolean;

@@ -9,7 +9,7 @@ function App() {
     <>
       <Provider store={store}>
         <NavBar />
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Outlet />
       </Provider>
     </>

@@ -37,12 +37,9 @@ export default function Shipment({ id }: Props) {
     api.Shipment.edit(id!, formData)
     .then(() => navigate("/calendar"))
     .catch(err => {
-      console.log(err.response.data.errors);
-      
-      setErrors(err.response.data.errors);
-      if (err.response.data.errors.Date) formData.date = "";
+      setErrors(err);
+      if (err.Date) formData.date = "";
     });
-    
   };
 
   useEffect(() => {
@@ -52,7 +49,7 @@ export default function Shipment({ id }: Props) {
         setFormData(response.data);
       })
       .catch((err) => console.log());
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
