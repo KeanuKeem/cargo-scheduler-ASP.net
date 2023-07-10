@@ -1,12 +1,9 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { ShipmentFormValues } from "../../../model/shipment";
 import FormButton from "./FormButton";
-import NotificationModal from "./NotificationModal";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { store } from "../../../store/store";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { modalActions } from "../../../store/modalSlice";
+import { calendarActions } from "../../../store/calendarSlice";
 
 interface Props {
   shipment: ShipmentFormValues;
@@ -16,6 +13,9 @@ interface Props {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
   setFormData: Dispatch<SetStateAction<ShipmentFormValues>>;
   handleEdit: (event: FormEvent) => void;
+  isEditProgress: boolean;
+  setIsEditProgress: (event: SetStateAction<boolean>) => void;
+  setIsProgress: (event: SetStateAction<boolean>) => void;
 }
 
 export default function ShipmentHeader({
@@ -26,9 +26,13 @@ export default function ShipmentHeader({
   setIsEdit,
   setFormData,
   handleEdit,
+  isEditProgress,
+  setIsEditProgress,
+  setIsProgress,
 }: Props) {
   const dispatch = useAppDispatch();
   const deleteBtnHandler = () => {
+    dispatch(calendarActions.refreshCalendar());
     dispatch(modalActions.notificationAction());
   };
 
@@ -79,6 +83,24 @@ export default function ShipmentHeader({
                   }
             }
           />
+          {isEdit && (
+            <FormButton
+              content={isEditProgress ? "Back" : "Progress"}
+              style={{
+                padding: ".5rem 1rem",
+                borderRadius: ".3rem",
+                border: "3px solid #d796ff",
+                backgroundColor: "#fff",
+                color: "#000",
+                width: "20%",
+              }}
+              onClick={
+                isEditProgress
+                  ? () => setIsEditProgress(false)
+                  : () => setIsEditProgress(true)
+              }
+            />
+          )}
           <FormButton
             content={isEdit ? "Cancel" : "Delete"}
             style={{
@@ -93,6 +115,7 @@ export default function ShipmentHeader({
                 ? () => {
                     setFormData(shipment);
                     setIsEdit(false);
+                    setIsEditProgress(false);
                   }
                 : () => deleteBtnHandler()
             }
@@ -115,6 +138,7 @@ export default function ShipmentHeader({
                 color: "#fff",
                 width: "30%",
               }}
+              onClick={() => setIsProgress(true)}
             />
           </div>
         )}

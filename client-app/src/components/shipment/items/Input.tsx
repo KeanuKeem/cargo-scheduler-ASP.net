@@ -2,16 +2,18 @@ import { ChangeEvent } from "react";
 
 interface Props {
   id: string;
-  value: string | Date;
+  value: string | Date | boolean;
+  checked?: boolean;
   onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type: string;
-  placeholder: string;
-  width: string;
+  placeholder?: string;
+  width?: string;
 }
 
-export default function InputField({
+export default function Input({
   id,
   value,
+  checked,
   onChange,
   type,
   placeholder,
@@ -27,9 +29,10 @@ export default function InputField({
     >
       <input
         name={id}
-        value={value.toString()}
+        value={value!.toString()}
         onChange={onChange}
         type={type}
+        checked={checked}
         placeholder={placeholder}
         style={{
           width: width,

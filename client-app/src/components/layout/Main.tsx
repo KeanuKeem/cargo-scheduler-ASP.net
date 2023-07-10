@@ -14,7 +14,7 @@ export default function Main({ children }: Props) {
         position: "absolute",
         top: "0",
         right: "0",
-        zIndex: "-2",
+        zIndex: "-3",
         overflow: "auto",
       }}
     >

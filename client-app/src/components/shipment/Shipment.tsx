@@ -1,55 +1,66 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  SetStateAction,
+} from "react";
 import api from "../../api/api";
-import { ShipmentFormValues, ShipmentResponseValues } from "../../model/shipment";
+import {
+  ShipmentFormValues,
+  ShipmentResponseValues,
+} from "../../model/shipment";
 import ShipmentHeader from "./items/ShipmentHeader";
 import ShipmentBody from "./items/ShipmentBody";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import exit from "../../assets/circle-xmark-regular.svg";
 import left from "../../assets/circle-left.svg";
+import HandlingForm from "./form/HandlingForm";
+import { useAppDispatch } from "../../store/hooks";
+import { shipmentActions } from "../../store/shipmentSlice";
 
 interface Props {
-  id: string | undefined;
+  shipment: ShipmentFormValues;
+  formData: ShipmentFormValues;
+  setFormData: (data: SetStateAction<ShipmentFormValues>) => void;
+  setIsProgress: (event: SetStateAction<boolean>) => void;
+  handleChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
-export default function Shipment({ id }: Props) {
+export default function Shipment({
+  shipment,
+  formData,
+  setFormData,
+  setIsProgress,
+  handleChange,
+}: Props) {
   const [isEdit, setIsEdit] = useState(false);
-  const [shipment, setShipment] = useState(new ShipmentFormValues());
   const [freightType, setFreightType] = useState("");
   const [shipmentType, setShipmentType] = useState("");
-  const [formData, setFormData] = useState(new ShipmentFormValues());
   const [errors, setErrors] = useState(new ShipmentResponseValues());
+  const [isEditProgress, setIsEditProgress] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  const dispatch = useAppDispatch();
+  const refresh = () => dispatch(shipmentActions.doRefresh());
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
     if (formData.date === "") formData.date = "1500-01-01";
-    api.Shipment.edit(id!, formData)
-    .then(() => navigate("/calendar"))
-    .catch(err => {
-      setErrors(err);
-      if (err.Date) formData.date = "";
-    });
-  };
-
-  useEffect(() => {
-    api.Shipment.getShipment(id!)
-      .then((response) => {
-        setShipment(response.data);
-        setFormData(response.data);
+    api.Shipment.edit(shipment.id!, formData)
+      .then(() => {
+        setIsEditProgress(false);
+        setIsEdit(false);
+        refresh();
       })
-      .catch((err) => console.log());
-  }, [id]);
+      .catch((err) => {
+        setErrors(err);
+        if (err.Date) formData.date = "";
+      });
+  };
 
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -77,7 +88,12 @@ export default function Shipment({ id }: Props) {
             src={left}
             onClick={() => {
               setFormData(shipment);
-              setIsEdit(false);
+              if (isEditProgress) {
+                setIsEditProgress(false);
+              } else {
+                setIsEdit(false);
+                setFormData(shipment);
+              }
             }}
             alt="left"
             style={{ width: "1rem", cursor: "pointer" }}
@@ -104,18 +120,29 @@ export default function Shipment({ id }: Props) {
             shipment={shipment}
             setFormData={setFormData}
             handleEdit={handleEdit}
+            isEditProgress={isEditProgress}
+            setIsEditProgress={setIsEditProgress}
+            setIsProgress={setIsProgress}
           />
-          <ShipmentBody
-            isEdit={isEdit}
-            shipment={shipment}
-            freightType={freightType}
-            shipmentType={shipmentType}
-            setShipmentType={setShipmentType}
-            setFreightType={setFreightType}
-            formData={formData}
-            handleChange={handleChange}
-            errors={errors}
-          />
+          {!isEditProgress ? (
+            <ShipmentBody
+              isEdit={isEdit}
+              shipment={shipment}
+              freightType={freightType}
+              shipmentType={shipmentType}
+              setShipmentType={setShipmentType}
+              setFreightType={setFreightType}
+              formData={formData}
+              handleChange={handleChange}
+              errors={errors}
+            />
+          ) : (
+            <HandlingForm
+              handleChange={handleChange}
+              handleCancel={() => setIsEditProgress(false)}
+              formData={formData}
+            />
+          )}
         </>
       )}
     </div>

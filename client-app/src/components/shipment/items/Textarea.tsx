@@ -11,7 +11,7 @@ interface Props {
   width: string;
 }
 
-export default function TextareaField({
+export default function Textarea({
   id,
   value,
   onChange,

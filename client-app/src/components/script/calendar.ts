@@ -1,5 +1,5 @@
 import { Dictionary } from "@reduxjs/toolkit";
-import { Shipment } from "../../model/shipment";
+import { Shipment, ShipmentFormValues, ShipmentResponseValues } from "../../model/shipment";
 
 export const months: string[][] = [
   ["January", "1"],
@@ -103,4 +103,38 @@ export function getGroupedShipments(shipmentsArray: Shipment[]) {
       : (shipmentsObject[date] = [shipment]);
   });
   return shipmentsObject;
+}
+
+export function makeDateDefault(data: ShipmentFormValues) {
+  const defaultDate = "0001-01-01";
+  if (data.date === "") data.date = defaultDate;
+  if (data.bookingDate === "" || !data.booking) data.bookingDate = defaultDate;
+  if (data.invoicingDate === "" || !data.invoicing) data.invoicingDate = defaultDate;
+  if (data.deliveryOrderDate === "" || !data.deliveryOrder) data.deliveryOrderDate = defaultDate;
+  if (data.clearanceDate === "" || !data.clearance) data.clearanceDate = defaultDate;
+  if (data.deliveryDate === "" || !data.delivery) data.deliveryDate = defaultDate;
+  if (data.storageStartDate === "" || !data.storageStart) data.storageStartDate = defaultDate;
+  if (data.storageEndDate === "" || !data.storageEnd) data.storageEndDate = defaultDate;
+}
+
+export function makeDateDefaultForResponse(data: ShipmentFormValues) {
+  const defaultDate = "";
+  if (data.bookingDate === "0001-01-01") data.bookingDate = defaultDate;
+  if (data.invoicingDate === "0001-01-01") data.invoicingDate = defaultDate;
+  if (data.deliveryOrderDate === "0001-01-01") data.deliveryOrderDate = defaultDate;
+  if (data.clearanceDate === "0001-01-01") data.clearanceDate = defaultDate;
+  if (data.deliveryDate === "0001-01-01") data.deliveryDate = defaultDate;
+  if (data.storageStartDate === "0001-01-01") data.storageStartDate = defaultDate;
+  if (data.storageEndDate === "0001-01-01") data.storageEndDate = defaultDate;
+}
+
+export function makeDateDefaultForErrors(errors: any, data: ShipmentFormValues) {
+  const defaultDate = "";
+  if (errors.bookingDate) data.bookingDate = defaultDate;
+  if (errors.invoicingDate) data.invoicingDate = defaultDate;
+  if (errors.deliveryOrderDate) data.deliveryOrderDate = defaultDate;
+  if (errors.clearanceDate) data.clearanceDate = defaultDate;
+  if (errors.deliveryDate) data.deliveryDate = defaultDate;
+  if (errors.storageStartDate) data.storageStartDate = defaultDate;
+  if (errors.storageEndDate) data.storageEndDate = defaultDate;
 }

@@ -1,12 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ShipmentResponseValues } from "../model/shipment";
 
 interface ShipmentState {
   isOpen: boolean;
+  shipments: {};
+  refresh: boolean;
 }
 
 const initialState: ShipmentState = {
   isOpen: false,
+  shipments: {},
+  refresh: false,
 };
 
 export const shipmentSlice = createSlice({
@@ -16,6 +19,15 @@ export const shipmentSlice = createSlice({
     action: (state) => {
       state.isOpen = !state.isOpen;
     },
+    setShipments: (state, action: PayloadAction<object>) => {
+      state.shipments = action.payload;
+    },
+    doRefresh: (state) => {
+      state.refresh = true;
+    },
+    RefreshBack: (state) => {
+      state.refresh = false;
+    }
   },
 });
 

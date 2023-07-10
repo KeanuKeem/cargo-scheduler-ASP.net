@@ -19,7 +19,21 @@ namespace Application.Shipments
             RuleFor(s => s.Vessel).NotEmpty().When(value => value.ShipmentType == "AIR").WithMessage("Flight must not be empty.");
             RuleFor(s => s.Vessel).NotEmpty().When(value => value.ShipmentType != "AIR").WithMessage("Vessel must not be empty.");
             RuleFor(s => s.Voyage).NotEmpty().When(value => value.ShipmentType != "AIR").WithMessage("Voyage must not be empty.");
-            RuleFor(s => s.Container).Matches("^[A-Za-z]{4}[0-9]{7}$").WithMessage("Please enter valid container number.");
+            RuleFor(s => s.Container).Matches("^[A-Za-z]{4}[0-9]{7}$").When(value => value.ShipmentType != "AIR").WithMessage("Please enter valid container number.");
+            RuleFor(s => s.BookingDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.Booking == true).WithMessage("Booking progress date must not be empty.");
+            RuleFor(s => s.BookingDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.Booking == true).WithMessage("Booking progress date must be from 2023 and onwards.");
+            RuleFor(s => s.InvoicingDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.Invoicing == true).WithMessage("Invoicing progress date must not be empty.");
+            RuleFor(s => s.InvoicingDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.Invoicing == true).WithMessage("Invoicing progress date must be from 2023 and onwards.");
+            RuleFor(s => s.DeliveryOrderDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.DeliveryOrder == true).WithMessage("Delivery Order progress date must not be empty.");
+            RuleFor(s => s.DeliveryOrderDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.DeliveryOrder == true).WithMessage("Delivery Order progress date must be from 2023 and onwards.");
+            RuleFor(s => s.ClearanceDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.Clearance == true).WithMessage("Customs Clearance progress date must not be empty.");
+            RuleFor(s => s.ClearanceDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.Clearance == true).WithMessage("Customs Clearance progress date must be from 2023 and onwards.");
+            RuleFor(s => s.DeliveryDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.Delivery == true).WithMessage("Delivery progress date must not be empty.");
+            RuleFor(s => s.DeliveryDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.Delivery == true).WithMessage("Delivery progress date must be from 2023 and onwards.");
+            RuleFor(s => s.StorageStartDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.StorageStart == true).WithMessage("Storage Start progress date must not be empty.");
+            RuleFor(s => s.StorageStartDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.StorageStart == true).WithMessage("Storage Start progress date must be from 2023 and onwards.");
+            RuleFor(s => s.StorageEndDate).Must(value => value != new DateOnly(0001, 1, 1)).When(s => s.StorageEnd == true).WithMessage("Storage End progress date must not be empty.");
+            RuleFor(s => s.StorageEndDate).Must(value => value >= new DateOnly(2023, 1, 1)).When(s => s.StorageEnd == true).WithMessage("Storage End progress date must be from 2023 and onwards.");
         }
     }
 }

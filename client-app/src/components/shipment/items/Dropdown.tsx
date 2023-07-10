@@ -15,7 +15,7 @@ interface Props {
   width: string;
 }
 
-export default function DropdownField({
+export default function Dropdown({
   option,
   setOption,
   options,

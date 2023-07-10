@@ -8,11 +8,11 @@ import MonthChangeBtn from "./items/MonthChangeBtn";
 import Button from "./items/Button";
 import { modalActions } from "../../store/modalSlice";
 import { Link } from "react-router-dom";
+import { Shipment } from "../../model/shipment";
+import { Dictionary } from "@reduxjs/toolkit";
 
 interface Props {
-  shipments: {
-    [key: string]: [{ id: string; ref: string; shipmentType: string }];
-  };
+  shipments: Dictionary<Shipment[]>
 }
 
 export default function Calendar({ shipments }: Props) {
@@ -69,7 +69,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[0].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[0].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[0].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -103,7 +103,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[1].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[1].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[1].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -137,7 +137,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[2].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[2].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[2].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -171,7 +171,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[3].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[3].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[3].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -205,7 +205,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[4].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[4].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[4].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -239,7 +239,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[5].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[5].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[5].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -273,7 +273,7 @@ export default function Calendar({ shipments }: Props) {
             </p>
             <div className="calendar__date-shipmentCont">
               {Number(dateArray[6].split(" ")[1]) in shipments &&
-                shipments[Number(dateArray[6].split(" ")[1])].map((item) => (
+                shipments[Number(dateArray[6].split(" ")[1])]!.map((item) => (
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
@@ -301,7 +301,7 @@ export default function Calendar({ shipments }: Props) {
               </p>
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
-                  shipments[Number(date.split(" ")[1])].map((item) => (
+                  shipments[Number(date.split(" ")[1])]!.map((item) => (
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
@@ -330,7 +330,7 @@ export default function Calendar({ shipments }: Props) {
               </p>
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
-                  shipments[Number(date.split(" ")[1])].map((item) => (
+                  shipments[Number(date.split(" ")[1])]!.map((item) => (
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
@@ -359,7 +359,7 @@ export default function Calendar({ shipments }: Props) {
               </p>
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
-                  shipments[Number(date.split(" ")[1])].map((item) => (
+                  shipments[Number(date.split(" ")[1])]!.map((item) => (
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
@@ -395,7 +395,7 @@ export default function Calendar({ shipments }: Props) {
               </p>
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
-                  shipments[Number(date.split(" ")[1])].map((item) => (
+                  shipments[Number(date.split(" ")[1])]!.map((item) => (
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
@@ -431,7 +431,7 @@ export default function Calendar({ shipments }: Props) {
               </p>
               <div className="calendar__date-shipmentCont">
                 {Number(date.split(" ")[1]) in shipments &&
-                  shipments[Number(date.split(" ")[1])].map((item) => (
+                  shipments[Number(date.split(" ")[1])]!.map((item) => (
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
