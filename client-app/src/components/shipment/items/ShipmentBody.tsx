@@ -59,13 +59,13 @@ export default function ShipmentBody({
                   width="30%"
                 />
               </dd>
-              <dd>{errors.FreightType && errors.FreightType[0]}</dd>
+              <dd>{errors.FreightType && errors.FreightType}</dd>
               <dt></dt>
               <dd
                 className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                 style={{ color: "red", fontStyle: "italic" }}
               >
-                {errors.FreightType && "- " + errors.FreightType[0]}
+                {errors.FreightType && "- " + errors.FreightType}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -87,7 +87,7 @@ export default function ShipmentBody({
                 className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                 style={{ color: "red", fontStyle: "italic" }}
               >
-                {errors.ShipmentType && "- " + errors.ShipmentType[0]}
+                {errors.ShipmentType && "- " + errors.ShipmentType}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -109,7 +109,7 @@ export default function ShipmentBody({
                 className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                 style={{ color: "red", fontStyle: "italic" }}
               >
-                {errors.Ref && "- " + errors.Ref[0]}
+                {errors.Ref && "- " + errors.Ref}
               </dd>
             </div>
           </>
@@ -167,7 +167,7 @@ export default function ShipmentBody({
             className="block text-sm font-medium leading-6 text-gray-900 ml-2"
             style={{ color: "red", fontStyle: "italic" }}
           >
-            {errors.Port && "- " + errors.Port[0]}
+            {errors.Port && "- " + errors.Port}
           </dd>
         </div>
         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -190,7 +190,7 @@ export default function ShipmentBody({
                     className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                     style={{ color: "red", fontStyle: "italic" }}
                   >
-                    {errors.Vessel && "- " + errors.Vessel[0]}
+                    {errors.Vessel && "- " + errors.Vessel}
                   </p>
                 </>
               ) : (
@@ -222,13 +222,13 @@ export default function ShipmentBody({
                     className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                     style={{ color: "red", fontStyle: "italic" }}
                   >
-                    {errors.Vessel && "- " + errors.Vessel[0]}
+                    {errors.Vessel && "- " + errors.Vessel}
                   </p>
                   <p
                     className="block text-sm font-medium leading-6 text-gray-900 ml-2"
                     style={{ color: "red", fontStyle: "italic" }}
                   >
-                    {errors.Voyage && "- " + errors.Voyage[0]}
+                    {errors.Voyage && "- " + errors.Voyage}
                   </p>
                 </div>
               )
@@ -306,7 +306,7 @@ export default function ShipmentBody({
               className="block text-sm font-medium leading-6 text-gray-900 ml-2"
               style={{ color: "red", fontStyle: "italic" }}
             >
-              {errors.Container && "- " + errors.Container[0]}
+              {errors.Container && "- " + errors.Container}
             </dd>
           </div>
         )}

@@ -21,7 +21,7 @@ export default function InputField({
   min,
   placeholder,
   width,
-  error
+  error,
 }: Props) {
   return (
     <div

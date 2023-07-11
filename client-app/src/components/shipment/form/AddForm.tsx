@@ -12,6 +12,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import { modalActions } from "../../../store/modalSlice";
 import { calendarActions } from "../../../store/calendarSlice";
 import HandlingForm from "./HandlingForm";
+import { checkValidity, inputValidator } from "../../script/validator";
 
 export default function AddForm() {
   const [freightType, setFreightType] = useState("Type");
@@ -27,12 +28,20 @@ export default function AddForm() {
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = event.target;
-    if ("checked" in event.target) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: "checked" in event.target,
-      }));
+    const { name, value, type } = event.target;
+
+    if (type === "checkbox" && event.target instanceof HTMLInputElement) {
+      if (event.target.checked) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: true,
+        }));
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: false,
+        }));
+      }
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -240,7 +249,9 @@ export default function AddForm() {
             <FormButton
               onClick={(e: FormEvent) => {
                 e.preventDefault();
-                setIsNext(true);
+                const errors = inputValidator(formData);
+                if (!checkValidity(errors)) setErrors(errors)
+                else setIsNext(true);
               }}
               content="Next"
               style={{

@@ -47,6 +47,7 @@ export const calendarSlice = createSlice({
         state.month = "January";
         state.monthNum = "1";
         state.year = state.year + 1;
+        state.refresh = true;
       } else {
         const monthIndex =
           new Date(state.month + " 1, " + state.year.toString()).getMonth() + 1;
@@ -62,6 +63,7 @@ export const calendarSlice = createSlice({
         state.month = "December";
         state.monthNum = "12";
         state.year = state.year--;
+        state.refresh = true;
       } else {
         const monthIndex =
           new Date(state.month + " 1, " + state.year.toString()).getMonth() - 1;
@@ -72,9 +74,11 @@ export const calendarSlice = createSlice({
     setMonth: (state, action: PayloadAction<string>) => {
       state.month = action.payload;
       state.monthNum = getMonthNum(action.payload);
+      state.refresh = true;
     },
     setYear: (state, action: PayloadAction<number>) => {
       state.year = action.payload;
+      state.refresh = true;
     },
     getDateArray: (state) => {
       state.dateArray = generateDateArray(state.month, state.year.toString());

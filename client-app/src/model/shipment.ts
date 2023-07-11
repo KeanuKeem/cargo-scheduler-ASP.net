@@ -118,18 +118,18 @@ export class ShipmentResponseValues {
   Ref: string = "";
   FreightType: string = "";
   ShipmentType: string = "";
-  Date: string = "";
+  Date: string | string[] = "";
   Port: string = "";
   Vessel: string = "";
   Voyage: string = "";
   Container: string = "";
-  BookingDate: string = "";
-  InvoicingDate: string = "";
-  DeliveryOrderDate: string = "";
-  ClearanceDate: string = "";
-  DeliveryDate: string = "";
-  StorageStartDate: string = "";
-  StorageEndDate: string = "";
+  BookingDate: string | string[] = "";
+  InvoicingDate: string | string[] = "";
+  DeliveryOrderDate: string | string[] = "";
+  ClearanceDate: string | string[] = "";
+  DeliveryDate: string | string[] = "";
+  StorageStartDate: string | string[] = "";
+  StorageEndDate: string | string[] = "";
 
   constructor(shipment?: ShipmentResponseValues) {
     if (shipment) {

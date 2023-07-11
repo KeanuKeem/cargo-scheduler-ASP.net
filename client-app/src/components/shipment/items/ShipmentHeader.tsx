@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import { ShipmentFormValues } from "../../../model/shipment";
+import { ShipmentFormValues, ShipmentResponseValues } from "../../../model/shipment";
 import FormButton from "./FormButton";
 import { useAppDispatch } from "../../../store/hooks";
 import { modalActions } from "../../../store/modalSlice";
@@ -16,6 +16,7 @@ interface Props {
   isEditProgress: boolean;
   setIsEditProgress: (event: SetStateAction<boolean>) => void;
   setIsProgress: (event: SetStateAction<boolean>) => void;
+  setErrors: (event: SetStateAction<ShipmentResponseValues>) => void;
 }
 
 export default function ShipmentHeader({
@@ -29,6 +30,7 @@ export default function ShipmentHeader({
   isEditProgress,
   setIsEditProgress,
   setIsProgress,
+  setErrors,
 }: Props) {
   const dispatch = useAppDispatch();
   const deleteBtnHandler = () => {
@@ -114,6 +116,7 @@ export default function ShipmentHeader({
               isEdit
                 ? () => {
                     setFormData(shipment);
+                    setErrors(new ShipmentResponseValues());
                     setIsEdit(false);
                     setIsEditProgress(false);
                   }

@@ -18,6 +18,7 @@ import left from "../../assets/circle-left.svg";
 import HandlingForm from "./form/HandlingForm";
 import { useAppDispatch } from "../../store/hooks";
 import { shipmentActions } from "../../store/shipmentSlice";
+import { checkValidity, inputValidator } from "../script/validator";
 
 interface Props {
   shipment: ShipmentFormValues;
@@ -49,17 +50,21 @@ export default function Shipment({
 
   const handleEdit = (event: FormEvent) => {
     event.preventDefault();
-    if (formData.date === "") formData.date = "1500-01-01";
-    api.Shipment.edit(shipment.id!, formData)
-      .then(() => {
-        setIsEditProgress(false);
-        setIsEdit(false);
-        refresh();
-      })
-      .catch((err) => {
-        setErrors(err);
-        if (err.Date) formData.date = "";
-      });
+    const errorsFront = inputValidator(formData);
+    if (!checkValidity(errorsFront)) setErrors(errorsFront);
+    else {
+      if (formData.date === "") formData.date = "1500-01-01";
+      api.Shipment.edit(shipment.id!, formData)
+        .then(() => {
+          setIsEditProgress(false);
+          setIsEdit(false);
+          refresh();
+        })
+        .catch((err) => {
+          setErrors(err);
+          if (err.Date) formData.date = "";
+        });
+    }
   };
 
   useEffect(() => {
@@ -123,6 +128,7 @@ export default function Shipment({
             isEditProgress={isEditProgress}
             setIsEditProgress={setIsEditProgress}
             setIsProgress={setIsProgress}
+            setErrors={setErrors}
           />
           {!isEditProgress ? (
             <ShipmentBody

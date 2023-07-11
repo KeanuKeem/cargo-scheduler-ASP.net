@@ -24,16 +24,15 @@ export default function CalendarPage() {
   // const [shipments, setShipments] = useState({});
 
   useEffect(() => {
-    if (Object.keys(shipments).length === 0 || refresh) {
-      api.Shipment.getShipments(year, monthNum)
-        .then((response) => {
-          const groupedShipment = getGroupedShipments(response.data);
-          setShipments(groupedShipment);
-        })
-        .catch((err) => console.log(err));
-    }
-    refreshOrigin();
-  }, [month, year, refresh, monthNum, shipments]);
+    console.log("loaded");
+    
+    api.Shipment.getShipments(year, monthNum)
+      .then((response) => {
+        const groupedShipment = getGroupedShipments(response.data);
+        setShipments(groupedShipment);
+      })
+      .catch((err) => console.log(err));
+  }, [month, year, refresh, monthNum]);
 
   return (
     <>

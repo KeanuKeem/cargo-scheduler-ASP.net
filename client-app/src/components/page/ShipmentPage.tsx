@@ -29,7 +29,7 @@ export default function ShipmentPage() {
     e.preventDefault();
     api.Shipment.delete(id!);
     closeHandler();
-    navigate("/shipment");
+    navigate("/calendar");
   };
 
   const handleChange = (

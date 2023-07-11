@@ -7,12 +7,14 @@ import Input from "./Input";
 import exit from "../../../assets/circle-xmark-regular.svg";
 import { useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
-import {
-  makeDateDefault,
-} from "../../script/calendar";
+import { makeDateDefault } from "../../script/calendar";
 import api from "../../../api/api";
 import { useAppDispatch } from "../../../store/hooks";
 import { shipmentActions } from "../../../store/shipmentSlice";
+import {
+  HandlingValidator,
+  checkHandlingValidator,
+} from "../../script/validator";
 
 interface Props {
   shipment: ShipmentFormValues;
@@ -39,15 +41,19 @@ export default function Progress({
   const refresh = () => dispatch(shipmentActions.doRefresh());
 
   const handleEdit = () => {
-    makeDateDefault(formData);
-    api.Shipment.edit(shipment.id!, formData)
-      .then(() => {
-        setIsProgress(false);
-        refresh();
-      })
-      .catch((err) => {
-        setErrors(err);
-      });
+    const checkResult = HandlingValidator(formData);
+    if (!checkHandlingValidator(checkResult)) setErrors(checkResult);
+    else {
+      makeDateDefault(formData);
+      api.Shipment.edit(shipment.id!, formData)
+        .then(() => {
+          setIsProgress(false);
+          refresh();
+        })
+        .catch((err) => {
+          setErrors(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -112,7 +118,9 @@ export default function Progress({
           style={{
             padding: "0",
             borderRadius: ".3rem",
-            border: !btnAvailable ? "3px solid rgba(43, 61, 231, 0.91)" : "3px solid #d6d6cb",
+            border: !btnAvailable
+              ? "3px solid rgba(43, 61, 231, 0.91)"
+              : "3px solid #d6d6cb",
             backgroundColor: "#fff",
             color: "#000",
           }}
