@@ -73,7 +73,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -107,7 +107,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -141,7 +141,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -175,7 +175,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -209,7 +209,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -243,7 +243,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -277,7 +277,7 @@ export default function Calendar({ shipments }: Props) {
                   <Link
                     className="calendar__date-shipment"
                     key={item.id}
-                    to={`/shipment/${item.id}`}
+                    to={`/scheduler/shipment/${item.id}`}
                   >
                     {"[" + item.shipmentType + "] " + item.ref}
                   </Link>
@@ -305,7 +305,7 @@ export default function Calendar({ shipments }: Props) {
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      to={`/shipment/${item.id}`}
+                      to={`/scheduler/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </Link>
@@ -334,7 +334,7 @@ export default function Calendar({ shipments }: Props) {
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      to={`/shipment/${item.id}`}
+                      to={`/scheduler/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </Link>
@@ -363,7 +363,7 @@ export default function Calendar({ shipments }: Props) {
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      to={`/shipment/${item.id}`}
+                      to={`/scheduler/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </Link>
@@ -399,7 +399,7 @@ export default function Calendar({ shipments }: Props) {
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      to={`/shipment/${item.id}`}
+                      to={`/scheduler/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </Link>
@@ -435,7 +435,7 @@ export default function Calendar({ shipments }: Props) {
                     <Link
                       className="calendar__date-shipment"
                       key={item.id}
-                      to={`/shipment/${item.id}`}
+                      to={`/scheduler/shipment/${item.id}`}
                     >
                       {"[" + item.shipmentType + "] " + item.ref}
                     </Link>

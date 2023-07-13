@@ -5,7 +5,6 @@ import {
 } from "../../../model/shipment";
 import Input from "./Input";
 import exit from "../../../assets/circle-xmark-regular.svg";
-import { useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
 import { makeDateDefault } from "../../script/calendar";
 import api from "../../../api/api";
@@ -33,7 +32,6 @@ export default function Progress({
   setIsProgress,
   handleChange,
 }: Props) {
-  const navigate = useNavigate();
   const [btnAvailable, setBtnAvailable] = useState(true);
   const [errors, setErrors] = useState(new ShipmentResponseValues());
 

@@ -108,7 +108,7 @@ export default function Shipment({
           src={exit}
           onClick={() => {
             setFormData(shipment);
-            navigate("/calendar");
+            navigate("/scheduler/calendar");
           }}
           alt="exit"
           style={{ width: "1rem", cursor: "pointer" }}
